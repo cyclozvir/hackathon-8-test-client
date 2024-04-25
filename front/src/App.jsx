@@ -1,11 +1,13 @@
 import './App.css'
-import { Heading } from "@chakra-ui/react";
+import Header from './components/Header';
+import Hero from './components/Hero';
 
 function App() {
 
   return (
     <>
-      <h1>єПотреба</h1>
+      <Header />
+      <Hero/>
     </>
   )
 }
