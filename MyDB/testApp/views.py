@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 # Create your views here.
-def tests_lists(request):
-    return render(request, '')
+def testApp_list(request):
+    return render(request, 'testApp/testApp_list.html')
