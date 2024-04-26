@@ -74,10 +74,24 @@ WSGI_APPLICATION = 'MyDB.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cyclozvir',
+        'USER': 'doadmin',
+        'PASSWORD': 'AVNS_T9inGAXAQGdPSau7xVS',
+        'HOST': 'db-mysql-fra1-hackathon8-do-user-15908868-0.c.db.ondigitalocean.com',
+        'PORT': '25060',
+         'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
