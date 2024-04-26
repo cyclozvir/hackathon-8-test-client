@@ -20,13 +20,21 @@
 body {
   background-color: #f1f1f1;
 }
+
+section.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+}
+
 header {
   padding: 1rem 2rem;
-  background-color: #FCFDFF;
+  background-color: #A41E35;
+  color: whitesmoke;
 }
 
 .heroBanner {
-  min-height: 60vh;
+  min-height: 50vh;
   background-image: url(/src/assets/hero.jpeg);
   background-size: contain;
   background-repeat: no-repeat;

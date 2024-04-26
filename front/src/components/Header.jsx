@@ -5,7 +5,7 @@ function Header() {
     return (
 			<>
 				<header>
-					<Flex>
+					<Flex maxWidth="1280px" m="0 auto">
 						<Heading size="xl">єПотреба</Heading>
 					</Flex>
 				</header>
