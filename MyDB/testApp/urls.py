@@ -2,4 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.testApp_list, name='testApp_list'),]
+    #path('', views.testApp_list, name='testApp_list'),
+    path('', views.getData, name='getData')]

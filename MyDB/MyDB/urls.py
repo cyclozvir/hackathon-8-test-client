@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.homepage),
     path('about/', views.about),
     path('testApp/', include('testApp.urls')),
+    path('api/', include('testApp.urls')),
 ]
