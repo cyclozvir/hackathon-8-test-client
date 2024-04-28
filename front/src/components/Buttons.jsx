@@ -5,7 +5,10 @@ function Buttons() {
 
     return (
 			<HStack justifyContent="center" spacing="32px">
-				<Link to="/register">
+				<Link
+					to="/register"
+					state={{ helper: true }}
+				>
 					<Button
 						w={200}
 						bg="#A41E35"
@@ -20,7 +23,10 @@ function Buttons() {
 					</Button>
 				</Link>
 
-				<Link to="/register">
+				<Link
+					to="/register"
+					state={{ helper: false }}
+				>
 					<Button
 						w={200}
 						bg="#A41E35"

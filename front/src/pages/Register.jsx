@@ -8,8 +8,9 @@ import {
 	Stack,
 	Heading,
 	Link as ChakraLink,
+	Text
 } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 
 const Register = () => {
 	const {
@@ -20,12 +21,21 @@ const Register = () => {
 		reset,
 	} = useForm();
 
+	const location = useLocation();
+	const { helper } = location.state !== null ? location.state : { helper: true };
+	const navigate = useNavigate();
+
+	console.log(helper);
+
 	const onSubmit = async (formData) => {
 		const { repeatPassword, ...formDataToSend } = formData;
-
+		const registerEndpoint = helper
+			? "http://localhost:8080/api/v1/auth/register/helper"
+			: "http://localhost:8080/api/v1/auth/register/in-need";
+		
 		try {
 			const response = await fetch(
-				"http://localhost:8080/api/v1/auth/register/in-need",
+				registerEndpoint,
 				{
 					method: "POST",
 					headers: {
@@ -41,17 +51,25 @@ const Register = () => {
 
 				console.log("Registration Error Message:", errorMessage);
 
-				// Display alert with the error message
 				alert(`Registration Error: ${errorMessage}`);
 			} else {
 				const data = await response.json();
 				console.log("Registration Response:", data);
 
-				document.cookie = `userRole=${data.role}; path=/`;
-				document.cookie = `userToken=${data.token}; path=/`;
+				const expirationTime = new Date();
+				expirationTime.setTime(expirationTime.getTime() + 15 * 60 * 1000); // 15 minutes in milliseconds
 
-				// Reset form after successful registration
-				reset();
+				document.cookie = `userRole=${
+					data.role
+				}; expires=${expirationTime.toUTCString()}; path=/`;
+				document.cookie = `userToken=${
+					data.token
+				}; expires=${expirationTime.toUTCString()}; path=/`;
+
+				const redirectUrl =
+					data.role == "HELPER" ? "/help-requests-list" : "/request-help";
+				
+				navigate(redirectUrl);
 			}
 		} catch (error) {
 			console.error("Error registering user:", error);
@@ -62,9 +80,13 @@ const Register = () => {
 
 	return (
 		<Box maxW="md" mx="auto" mt={8} p={6} borderWidth={1} borderRadius="md">
-			<Heading as="h2" size="lg" textAlign="center" mb={6}>
+			<Heading as="h2" size="lg" textAlign="center">
 				Створити Аккаунт
 			</Heading>
+			<Text mb="8px" mt="4px" textAlign="center" fontStyle="italic">
+				{helper ? "Хочу Допомогти" : "Шукаю Допомогу"}
+			</Text>
+			<></>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Stack spacing={3}>
 					<FormControl isRequired>
