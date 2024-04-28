@@ -1,17 +1,18 @@
 import './App.css'
-import Buttons from './components/Buttons';
 import Header from './components/Header';
-import Hero from './components/Hero';
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home.jsx"
+import Register from './pages/Register.jsx';
 
 function App() {
 
   return (
 		<>
 			<Header />
-			<section className='container'>
-        <Hero />
-        <Buttons/>
-			</section>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/register" element={<Register />} />
+			</Routes>
 		</>
 	);
 }
