@@ -22,7 +22,7 @@ To run the project locally, follow these steps:
    cd front
    ```
 
-2 install node modules (make sure to use node >=18)
+2. install node modules (make sure to use node >=18)
 
    ```
    npm install
