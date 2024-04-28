@@ -1,4 +1,4 @@
-# hackathon-8-test-task
+# hackathon-8-test-client
 
 (Це клієнтська сторона застосунку. Хостити її потрібно локально)
 
