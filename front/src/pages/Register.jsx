@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
 	Box,
@@ -8,7 +9,7 @@ import {
 	Stack,
 	Heading,
 	Link as ChakraLink,
-	Text
+	Text,
 } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 
@@ -22,28 +23,50 @@ const Register = () => {
 	} = useForm();
 
 	const location = useLocation();
-	const { helper } = location.state !== null ? location.state : { helper: true };
+	const { helper } =
+		location.state !== null ? location.state : { helper: true };
 	const navigate = useNavigate();
 
-	console.log(helper);
+	useEffect(() => {
+		const checkForCookie = () => {
+			const cookies = document.cookie;
+			return (
+				cookies.includes("userRole=IN_NEED") && cookies.includes("userToken=")
+			);
+		};
+
+		if (checkForCookie()) {
+			navigate("/request-help");
+		}
+	}, [navigate]);
+
+	useEffect(() => {
+		const checkForCookie = () => {
+			const cookies = document.cookie;
+			return (
+				cookies.includes("userRole=HELPER") && cookies.includes("userToken=")
+			);
+		};
+
+		if (checkForCookie()) {
+			navigate("/help-requests-list");
+		}
+	}, [navigate]);
 
 	const onSubmit = async (formData) => {
 		const { repeatPassword, ...formDataToSend } = formData;
 		const registerEndpoint = helper
-			? "http://localhost:8080/api/v1/auth/register/helper"
-			: "http://localhost:8080/api/v1/auth/register/in-need";
-		
+			? "https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/auth/register/helper"
+			: "https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/auth/register/in-need";
+
 		try {
-			const response = await fetch(
-				registerEndpoint,
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(formDataToSend),
-				}
-			);
+			const response = await fetch(registerEndpoint, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formDataToSend),
+			});
 
 			if (response.status === 409) {
 				const errorData = await response.json();
@@ -68,7 +91,7 @@ const Register = () => {
 
 				const redirectUrl =
 					data.role == "HELPER" ? "/help-requests-list" : "/request-help";
-				
+
 				navigate(redirectUrl);
 			}
 		} catch (error) {

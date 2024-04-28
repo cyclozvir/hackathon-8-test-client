@@ -1,4 +1,4 @@
-
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
 	Box,
@@ -8,25 +8,48 @@ import {
 	Input,
 	Stack,
 	Heading,
-	Link as ChakraLink,
-	Text,
 } from "@chakra-ui/react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 	const {
 		register,
 		handleSubmit,
-        formState: { errors },
-        reset
+		formState: { errors },
+		reset,
 	} = useForm();
 
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		const checkForCookie = () => {
+			const cookies = document.cookie;
+			return (
+				cookies.includes("userRole=IN_NEED") && cookies.includes("userToken=")
+			);
+		};
+
+		if (checkForCookie()) {
+			navigate("/request-help");
+		}
+	}, [navigate]);
+
+	useEffect(() => {
+		const checkForCookie = () => {
+			const cookies = document.cookie;
+			return (
+				cookies.includes("userRole=HELPER") && cookies.includes("userToken=")
+			);
+		};
+
+		if (checkForCookie()) {
+			navigate("/help-requests-list");
+		}
+	}, [navigate]);
 
 	const onSubmit = async (formData) => {
 		try {
-			const response = await fetch(registerEndpoint, {
+			const response = await fetch("https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/auth/login", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -40,8 +63,8 @@ const Login = () => {
 
 				console.log("Login Error Message:", errorMessage);
 
-                alert(`Login Error: ${errorMessage}`);
-                reset();
+				alert(`Login Error: ${errorMessage}`);
+				reset();
 			} else {
 				const data = await response.json();
 				console.log("Login Response:", data);
