@@ -49,7 +49,7 @@ const Login = () => {
 
 	const onSubmit = async (formData) => {
 		try {
-			const response = await fetch("https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/auth/login", {
+			const response = await fetch("https://dolphin-app-va5gv.ondigitalocean.app/api/v1/auth/login", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
