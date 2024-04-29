@@ -56,8 +56,8 @@ const Register = () => {
 	const onSubmit = async (formData) => {
 		const { repeatPassword, ...formDataToSend } = formData;
 		const registerEndpoint = helper
-			? "https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/auth/register/helper"
-			: "https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/auth/register/in-need";
+			? "https://dolphin-app-va5gv.ondigitalocean.app/api/v1/auth/register/helper"
+			: "https://dolphin-app-va5gv.ondigitalocean.app/api/v1/auth/register/in-need";
 
 		try {
 			const response = await fetch(registerEndpoint, {
