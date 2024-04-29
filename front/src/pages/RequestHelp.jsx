@@ -43,7 +43,7 @@ function RequestHelp() {
 		const fetchTags = async () => {
 			try {
 				const response = await fetch(
-					"https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/tags"
+					"https://dolphin-app-va5gv.ondigitalocean.app/api/v1/tags"
 				);
 				if (!response.ok) {
 					throw new Error("Failed to fetch tags");
@@ -59,7 +59,7 @@ function RequestHelp() {
 		const fetchCategories = async () => {
 			try {
 				const response = await fetch(
-					"https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/categories"
+					"https://dolphin-app-va5gv.ondigitalocean.app/api/v1/categories"
 				);
 				if (!response.ok) {
 					throw new Error("Failed to fetch categories");
@@ -84,7 +84,7 @@ function RequestHelp() {
 		const token = getJwtTokenFromCookie();
 		try {
 			const response = await fetch(
-				"https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/events",
+				"https://dolphin-app-va5gv.ondigitalocean.app/api/v1/events",
 				{
 					method: "POST",
 					headers: {
