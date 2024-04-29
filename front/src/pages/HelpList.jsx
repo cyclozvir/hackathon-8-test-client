@@ -36,7 +36,7 @@ function HelpList() {
 		if (token) {
 			try {
 				const response = await fetch(
-					"https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/images/13",
+					"https://dolphin-app-va5gv.ondigitalocean.app/api/v1/images/13",
 					{
 						method: "GET",
 						headers: {
@@ -79,7 +79,7 @@ function HelpList() {
 			if (token) {
 				try {
 					const response = await fetch(
-						"https://lionfish-app-cwlbq.ondigitalocean.app/api/v1/events",
+						"https://dolphin-app-va5gv.ondigitalocean.app/api/v1/events",
 						{
 							method: "GET",
 							headers: {
