@@ -19,6 +19,7 @@ To run the project locally, follow these steps:
 
    ```
    git clone https://github.com/cyclozvir/hackathon-8-test-client.git
+   cd hackathon-8-test-client
    cd front
    ```
 
